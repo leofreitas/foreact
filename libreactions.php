@@ -54,6 +54,34 @@ function get_reaction_icon($type, $post, $idreaction){
                 
             }
             
+        }elseif ($type[$i][$i]->type == 'fa-stack') {
+
+            $name =explode("|", $type[$i][$i]->name);
+            $votes = $this->get_votes($post, $type[$i][$i]->id);
+            $hasvote = $this->has_vote($post,$type[$i][$i]->id,$user);
+            if($hasvote){
+                $out .='<a id="btn'.$idbutton.$type[$i][$i]->id.'"class="btn btn-primary" onclick="vote('.$foreact.','.$user.','.$post.','.$type[$i][$i]->id.','.$votes.','.$hasvote.')">';
+            
+                $out .='<span class="fa-stack">';
+                $out .='<i class="'.$name[0].'"></i>';
+                $out .='<i class="'.$name[1].'"></i>';
+                $out .='</span>';
+                $out .= '<i ><br>'.$type[$i][$i]->description.'</i>';
+                $out .= '<i id="'.$idbutton.$type[$i][$i]->id.'"> '.$votes.'</i>';
+                $out .='</a>';
+            }else{
+                $out .='<a id="btn'.$idbutton.$type[$i][$i]->id.'"class="btn btn-default btn-sm" onclick="vote('.$foreact.','.$user.','.$post.','.$type[$i][$i]->id.','.$votes.','.$hasvote.')">';
+            
+                $out .='<span class="fa-stack">';
+                $out .='<i class="'.$name[0].'"></i>';
+                $out .='<i class="'.$name[1].'"></i>';
+                $out .='</span>';
+                $out .= '<i ><br>'.$type[$i][$i]->description.'</i>';
+                $out .= '<i id="'.$idbutton.$type[$i][$i]->id.'"> '.$votes.'</i>';
+                $out .='</a>';
+            } 
+            
+
         }
         
     }

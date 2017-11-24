@@ -9,7 +9,7 @@ function vote(foreact,user,post,reaction,votes,hasvote){
 	       answer=JSON.parse(this.response);
            document.getElementById(cname).firstChild.data=' '+answer.votes;
            if (answer.has_vote) {
-            document.getElementById('btn'+cname).className ='btn btn-primary';
+            document.getElementById('btn'+cname).className ='btn btn-primary btn-sm';
            }else{
             document.getElementById('btn'+cname).className ='btn btn-default btn-sm';
            }

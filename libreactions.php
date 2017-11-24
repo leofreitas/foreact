@@ -39,7 +39,7 @@ function get_reaction_icon($type, $post, $idreaction){
 
             if($hasvote){
                 $out .='<a id="btn'.$idbutton.$type[$i][$i]->id.'"class="btn btn-primary" onclick="vote('.$foreact.','.$user.','.$post.','.$type[$i][$i]->id.','.$votes.','.$hasvote.')">';
-                $out .= '<i class="fa fa-'.$type[$i][$i]->name.'" aria-hidden="true"></i>';
+                $out .= '<i class="'.$type[$i][$i]->name.'" aria-hidden="true"></i>';
                 $out .= '<i><br>'.$type[$i][$i]->description.'</i>';
                 $out .= '<i id="'.$idbutton.$type[$i][$i]->id.'"> '.$votes.'</i>';
                 $out .='</a>';
@@ -47,7 +47,7 @@ function get_reaction_icon($type, $post, $idreaction){
     
             }else{
                 $out .='<a id="btn'.$idbutton.$type[$i][$i]->id.'" class="btn btn-default btn-sm" onclick="vote('.$foreact.','.$user.','.$post.','.$type[$i][$i]->id.','.$votes.','.$hasvote.')">';
-                $out .= '<i class="fa fa-'.$type[$i][$i]->name.'" aria-hidden="true"></i>';
+                $out .= '<i class="'.$type[$i][$i]->name.'" aria-hidden="true"></i>';
                 $out .= '<i ><br>'.$type[$i][$i]->description.'</i>';
                 $out .= '<i id="'.$idbutton.$type[$i][$i]->id.'"> '.$votes.'</i>';
                 $out .='</a>';

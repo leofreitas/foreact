@@ -1,0 +1,10 @@
+{
+    "name": "moodle-mod_foreact-subscriptiontoggle",
+    "builds": {
+        "moodle-mod_foreact-subscriptiontoggle": {
+            "jsfiles": [
+                "toggle.js"
+            ]
+        }
+    }
+}

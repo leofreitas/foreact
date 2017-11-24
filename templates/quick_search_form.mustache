@@ -1,0 +1,14 @@
+<div class="foreactsearch">
+    <form action="{{actionurl}}" style="display: inline;">
+        <fieldset class="invisiblefieldset">
+            {{#helpicon}}
+                {{>core/help_icon}}
+            {{/helpicon}}
+            <input type="hidden" name="id" value="{{courseid}}">
+            <label class="accesshide" for="search">{{#str}}search, foreact{{/str}}</label>
+            <input id="search" name="search" type="text" size="18" value="{{query}}">
+            <label class="accesshide" for="searchforeacts">{{#str}}searchforeacts, foreact{{/str}}</label>
+            <input id="searchforeacts" type="submit" value={{#quote}}{{#str}}searchforeacts, foreact{{/str}}{{/quote}}>
+        </fieldset>
+    </form>
+</div>

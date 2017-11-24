@@ -1,0 +1,339 @@
+/**
+ * Structure of a foreact post
+ * div.foreactpost(.read.unread)
+ *     div.header.row
+ *         div.picture.left
+ *         div.topic(.starter)
+ *             div.subject
+ *             div.author
+ *     div.row
+ *         div.side.left
+ *         div.content-mask
+ *             div.content
+ *                 div.attachments
+ *                 div.posting(.shortenedpost|.fullpost)
+ *                     // message
+ *                 div.attachedimages
+ *                     // attachedimages
+ *     div.row
+ *         div.left
+ *         div.options
+ *             div.commands
+ *             div.post-word-count
+ *             div.foreact-post-rating
+ *             div.link
+ *             div.footer
+ */
+
+.foreactpost {
+    display: block;
+    position: relative;
+    margin: 0 0 1em 0;
+    padding: 15px;
+    max-width: 100%;
+}
+
+.foreactpost .row {
+    width: 100%;
+    position: relative;
+}
+
+.foreactpost .row .left {
+    float: left;
+    width: 55px;
+    overflow: hidden;
+}
+
+.foreactpost .row .left .grouppictures a {
+    text-align: center;
+    display: block;
+    margin: 6px 2px 0 2px;
+}
+
+.foreactpost .row .left .grouppicture {
+    width: 20px;
+    height: 20px;
+}
+
+.foreactpost .row .topic,
+.foreactpost .row .content-mask,
+.foreactpost .row .options {
+    margin-left: 43px;
+}
+
+.foreactpost .picture img {
+    margin: 4px;
+}
+
+.foreactpost .options .commands,
+.foreactpost .content .attachments,
+.foreactpost .options .footer,
+.foreactpost .options .link {
+    text-align: right;
+}
+
+.foreactpost .options .foreact-post-rating {
+    float: left;
+}
+
+.foreactpost .content .posting {
+    overflow: auto;
+    max-width: 100%;
+}
+
+.foreactpost .content .attachedimages img {
+    max-width: 100%;
+}
+
+.foreactpost .post-word-count {
+    font-size: .85em;
+    font-style: italic;
+}
+
+.foreactpost .shortenedpost .post-word-count {
+    display: inline;
+    padding: 0 .3em;
+}
+
+.path-mod-foreact .foreactolddiscuss,
+#page-mod-foreact-search .c0 {
+    text-align: right;
+}
+
+.path-mod-foreact .indent {
+    margin-left: 3%;
+}
+
+.path-mod-foreact .foreactheaderlist {
+    width: 100%;
+    border-width: 1px;
+    border-style: solid;
+    border-collapse: separate;
+    margin-top: 10px;
+}
+
+.path-mod-foreact .foreactheaderlist td {
+    border-width: 1px 0 0 1px;
+    border-style: solid;
+}
+
+.path-mod-foreact .foreactheaderlist th.header.replies .iconsmall {
+    margin: 0 .3em;
+}
+
+.path-mod-foreact .foreactheaderlist .picture {
+    width: 35px;
+}
+
+.path-mod-foreact .foreactheaderlist .discussion .starter {
+    vertical-align: middle;
+}
+
+.path-mod-foreact .foreactheaderlist .discussion .pinned img {
+    padding: 5px;
+}
+
+.path-mod-foreact .foreactheaderlist .discussion .lastpost {
+    white-space: nowrap;
+    text-align: right;
+}
+
+.path-mod-foreact .foreactheaderlist .replies,
+.path-mod-foreact .foreactheaderlist .discussion .author {
+    white-space: nowrap;
+}
+
+.path-mod-foreact .foreactheaderlist thead .discussionsubscription {
+    text-align: center;
+}
+
+/** Styles for subscribers.php */
+#page-mod-foreact-subscribers .subscriberdiv,
+#page-mod-foreact-subscribers .subscribertable {
+    width: 100%;
+    vertical-align: top;
+}
+
+#page-mod-foreact-subscribers .subscribertable tr td {
+    vertical-align: top;
+}
+
+#page-mod-foreact-subscribers .subscribertable tr td.actions {
+    width: 16%;
+    padding-top: 3em;
+}
+
+#page-mod-foreact-subscribers .subscribertable tr td.actions .actionbutton {
+    margin: 0.3em 0;
+    padding: 0.5em 0;
+    width: 100%;
+}
+
+#page-mod-foreact-subscribers .subscribertable tr td.existing,
+#page-mod-foreact-subscribers .subscribertable tr td.potential {
+    width: 42%;
+}
+
+/** Styles for discuss.php **/
+#page-mod-foreact-discuss .discussioncontrols {
+    width: 100%;
+    margin: 5px;
+}
+
+#page-mod-foreact-discuss .discussioncontrols .controlscontainer {
+    width: 100%;
+    float: right;
+}
+
+#page-mod-foreact-discuss .discussioncontrols .discussioncontrol {
+    float: left;
+}
+
+#page-mod-foreact-discuss .discussioncontrol.exporttoportfolio {
+    text-align: left;
+}
+
+#page-mod-foreact-discuss .discussioncontrol.displaymode {
+    padding-right: 10px;
+}
+
+#page-mod-foreact-discuss .discussioncontrol.movediscussion {
+    padding-right: 10px;
+}
+
+/** Styles for view.php **/
+#page-mod-foreact-view .foreactaddnew {
+    margin-bottom: 20px;
+}
+
+#page-mod-foreact-view .groupmenu {
+    float: left;
+    text-align: left;
+    white-space: nowrap;
+}
+
+#page-mod-foreact-index .subscription,
+#page-mod-foreact-view .subscription {
+    float: right;
+    text-align: right;
+    white-space: nowrap;
+    margin: 5px 0;
+}
+
+/** Styles for search.php */
+#page-mod-foreact-search .introcontent {
+    padding: 15px;
+    font-weight: bold;
+}
+
+.path-mod-foreact span.unread a:first-child {
+    padding-right: 10px;
+}
+
+.path-mod-foreact span.unread img {
+    margin-left: 5px;
+}
+
+/** Unknown Styles ??? */
+#email .unsubscribelink {
+    margin-top: 20px;
+}
+
+/* foreactpost unread
+-------------------------*/
+.foreactpost.unread .row.header,
+.path-course-view .unread,
+span.unread {
+    background-color: #ffd;
+}
+
+.foreactpost.unread .row.header {
+    border-bottom: 1px solid #ddd;
+}
+
+/* foreactpost hash anchor target */
+.path-mod-foreact :target ~ .foreactpost:before {
+    display: block;
+    content: '';
+    width: 4px;
+    position: absolute;
+    background: #0070a8;
+    left: -1px;
+    top: -1px;
+    bottom: -1px;
+}
+
+/* Discussion navigation */
+.path-mod-foreact .discussion-nav {
+    margin: .5em 0;
+}
+
+.path-mod-foreact .discussion-nav ul {
+    margin: 0;
+    list-style: none;
+}
+
+.path-mod-foreact .discussion-nav .prev-discussion:before {
+    /*rtl:raw:
+    content: ' ► ';
+    */
+    /*rtl:remove*/
+    content: ' ◄ ';
+}
+
+.path-mod-foreact .discussion-nav .next-discussion:after {
+    /*rtl:raw:
+    content: ' ◄ ';
+    */
+    /*rtl:remove*/
+    content: ' ► ';
+}
+
+.path-mod-foreact .discussion-nav .next-discussion {
+    float: right;
+}
+
+.path-mod-foreact .discussion-nav .prev-discussion {
+    float: left;
+}
+
+.path-mod-foreact .preload-subscribe {
+    background: url([[pix:mod_foreact|t/subscribed]]) no-repeat -9999px -9999px;
+}
+
+.path-mod-foreact .preload-unsubscribe {
+    background: url([[pix:mod_foreact|t/unsubscribed]]) no-repeat -9999px -9999px;
+}
+
+.path-mod-foreact .discussionsubscription {
+    margin-top: -10px;
+    text-align: right;
+    margin-bottom: 10px;
+}
+
+.path-mod-foreact .discussionsubscription > a > img {
+    width: 12px;
+    padding: 0 4px;
+}
+
+#page-mod-foreact-view img.timedpost {
+    margin-right: 5px;
+}
+
+
+
+
+
+#page #region-main .foreactpost {
+    background: #fff;
+    border-bottom: 2px solid #eee;
+    box-shadow: 0 0 5px 0 #eee;
+}
+
+.foreactpost .header {
+    margin-bottom: 3px;
+}
+
+.foreactpost .row {
+    margin-left: 0!important;
+}

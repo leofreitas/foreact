@@ -77,7 +77,7 @@ class mod_foreact_external extends external_api {
 
             // Get the foreacts in this course. This function checks users visibility permissions.
             $foreacts = get_all_instances_in_courses("foreact", $courses);
-            foreach ($foreacts as $foreact) {
+            /**foreach ($foreacts as $foreact) {
 
                 $course = $courses[$foreact->course];
                 $cm = get_coursemodule_from_instance('foreact', $foreact->id, $course->id);
@@ -104,7 +104,7 @@ class mod_foreact_external extends external_api {
 
                 // Add the foreact to the array to return.
                 $arrforeacts[$foreact->id] = $foreact;
-            }
+            }**/
         }
 
         return $arrforeacts;

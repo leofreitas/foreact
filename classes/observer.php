@@ -127,8 +127,8 @@ class mod_foreact_observer {
         $format = course_get_format($course);
         if ($format->supports_news() && !empty($course->newsitems)) {
             require_once($CFG->dirroot . '/mod/foreact/lib.php');
-            // Auto create the announcements foreact.
-            foreact_get_course_foreact($event->objectid, 'news');
+            // Disable Auto create the announcements foreact.
+            //foreact_get_course_foreact($event->objectid, 'news');
         }
     }
 
@@ -145,8 +145,8 @@ class mod_foreact_observer {
         $format = course_get_format($course);
         if ($format->supports_news() && !empty($course->newsitems)) {
             require_once($CFG->dirroot . '/mod/foreact/lib.php');
-            // Auto create the announcements foreact.
-            foreact_get_course_foreact($event->objectid, 'news');
+            // Disable create the announcements foreact.
+            //foreact_get_course_foreact($event->objectid, 'news');
         }
     }
 }

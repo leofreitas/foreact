@@ -7,7 +7,7 @@ function vote(foreact,user,post,reaction,votes,hasvote){
     xmlhttp.onreadystatechange = function() {
         if (this.readyState==4 && this.status==200) {
 	       answer=JSON.parse(this.response);
-           document.getElementById(cname).firstChild.data=' '+answer.votes;
+           document.getElementById(cname).firstChild.data=' ('+answer.votes+')';
            if (answer.has_vote) {
             document.getElementById('btn'+cname).className ='btn btn-primary btn-sm';
            }else{

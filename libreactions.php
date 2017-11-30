@@ -26,9 +26,10 @@ function get_reaction_type($foreact){
 }
 
 function get_reaction_icon($type, $post, $idreaction){
+    global $USER;
     $out = '';
     $foreact=$idreaction[0];
-    $user=$idreaction[1];
+    $user=$USER->id;
     $idbutton =  $foreact.$post.$user;
     $out .='<hr>';
     for ($i=1; $i <= sizeof($type); $i++) { 
@@ -95,7 +96,7 @@ function has_vote($post,$reaction,$user){
     $conditions = array('post' => $post, 'reaction'=>$reaction,'user'=>$user );
     if($DB->record_exists($table, $conditions)){
         $boo=1;
-    }
+    };
     return $boo;
 }
 

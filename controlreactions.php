@@ -23,4 +23,5 @@ if ($ireactions->has_vote($post,$reaction,$user)) {
 $response = array('votes' => $ireactions->get_votes($post,$reaction),'has_vote'=>$ireactions->has_vote($post,$reaction,$user) );
 echo json_encode($response);
 
+
 ?>

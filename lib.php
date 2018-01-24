@@ -88,7 +88,7 @@ define('foreact_DISCUSSION_UNPINNED', 0);
 
 function foreact_add_instance($foreact, $mform = null) {
     global $CFG, $DB;
-     
+
     $foreact->timemodified = time();
 
     if (empty($foreact->assessed)) {
@@ -241,7 +241,10 @@ function foreact_update_instance($foreact, $mform) {
         $discussion->name = $foreact->name;
         $DB->update_record('foreact_discussions', $discussion);
     }
-
+    $record = new stdClass();
+    $record->foreact         = $foreact->id;
+    $record->reaction         = '3';
+    $DB->insert_record('foreact_reactions', $record);
     $DB->update_record('foreact', $foreact);
 
     $modcontext = context_module::instance($foreact->coursemodule);

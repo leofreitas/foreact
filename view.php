@@ -118,7 +118,7 @@
     // Mark viewed and trigger the course_module_viewed event.
     foreact_view($foreact, $course, $cm, $context);
 
-    //echo $OUTPUT->header();
+    echo $OUTPUT->header();
 
     echo $OUTPUT->heading(format_string($foreact->name), 2);
     if (!empty($foreact->intro) && $foreact->type != 'single' && $foreact->type != 'teacher') {

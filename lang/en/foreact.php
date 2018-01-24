@@ -566,3 +566,6 @@ $string['emaildigestupdated_default'] = 'Your default profile setting of \'{$a->
 $string['emaildigest_0'] = 'You will receive one e-mail per foreact post.';
 $string['emaildigest_1'] = 'You will receive one digest e-mail per day containing the complete contents of each foreact post.';
 $string['emaildigest_2'] = 'You will receive one digest e-mail per day containing the subject of each foreact post.';
+$string['iconoptions'] = 'Icons';
+$string['iconoptionshelp'] = 'Icon options';
+

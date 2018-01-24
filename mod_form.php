@@ -53,7 +53,14 @@ class mod_foreact_mod_form extends moodleform_mod {
         $mform->addElement('select', 'type', get_string('foreacttype', 'foreact'), $foreacttypes);
         $mform->addHelpButton('type', 'foreacttype', 'foreact');
         $mform->setDefault('type', 'general');
-
+        //
+        $iconoptions = array(
+        	0=>'None',
+        	1=>'Intagram'
+        );
+       	$mform->addElement('select', 'iconoptions', get_string('iconoptions', 'foreact'), $iconoptions);
+        $mform->addHelpButton('iconoptions', 'iconoptionshelp', 'foreact');
+        //
         // Attachments and word count.
         $mform->addElement('header', 'attachmentswordcounthdr', get_string('attachmentswordcount', 'foreact'));
 
@@ -261,7 +268,7 @@ class mod_foreact_mod_form extends moodleform_mod {
      */
     public function add_completion_rules() {
         $mform =& $this->_form;
-
+        
         $group=array();
         $group[] =& $mform->createElement('checkbox', 'completionpostsenabled', '', get_string('completionposts','foreact'));
         $group[] =& $mform->createElement('text', 'completionposts', '', array('size'=>3));

@@ -88,7 +88,7 @@ define('foreact_DISCUSSION_UNPINNED', 0);
 
 function foreact_add_instance($foreact, $mform = null) {
     global $CFG, $DB;
-
+     
     $foreact->timemodified = time();
 
     if (empty($foreact->assessed)) {

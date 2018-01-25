@@ -100,6 +100,14 @@ function has_vote($post,$reaction,$user){
     return $boo;
 }
 
+public function stack_names(){
+    global $CFG;
+    $stack = json_decode(file_get_contents($CFG->dirroot.'/mod/foreact/iconstack.json'), true);
+    $keys = array_keys($stack['Stack']);
+    $arrayName = array('0' => '1');
+    return $keys;
+}
+
 
 }
 ?>

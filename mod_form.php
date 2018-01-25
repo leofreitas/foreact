@@ -26,6 +26,7 @@ if (!defined('MOODLE_INTERNAL')) {
 }
 
 require_once ($CFG->dirroot.'/course/moodleform_mod.php');
+require_once('libreactions.php');
 
 class mod_foreact_mod_form extends moodleform_mod {
 
@@ -55,10 +56,8 @@ class mod_foreact_mod_form extends moodleform_mod {
         $mform->addHelpButton('type', 'foreacttype', 'foreact');
         $mform->setDefault('type', 'general');
         //
-        $iconoptions = array(
-        	0=>'None',
-        	1=>'Instagram'
-        );
+        $libreactions = new Reactions();
+        $iconoptions = $libreactions->stack_names();
        	$mform->addElement('select', 'iconoptions', get_string('iconoptions', 'foreact'), $iconoptions);
         $mform->addHelpButton('iconoptions', 'iconoptionshelp', 'foreact');
         //

@@ -1,0 +1,11 @@
+{
+    "Stack": {
+        "Instagram": [
+            {"type":"fa", "name":"fa fa-heart-o fa-2x", "description":"Gostei"}
+        ],
+        "Youtube": [
+            {"type":"fa", "name":"fa fa-heart-o fa-2x", "description":"Gostei"},
+            {"type":"fa", "name":"fa fa-heart-o fa-2x", "description":"Não gostei"}
+        ]
+    }
+}

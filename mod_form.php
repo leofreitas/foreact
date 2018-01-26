@@ -57,6 +57,7 @@ class mod_foreact_mod_form extends moodleform_mod {
         $mform->setDefault('type', 'general');
         //
         $libreactions = new Reactions();
+        $libreactions->add_new_icon();
         $iconoptions = $libreactions->stack_names();
        	$mform->addElement('select', 'iconoptions', get_string('iconoptions', 'foreact'), $iconoptions);
         $mform->addHelpButton('iconoptions', 'iconoptionshelp', 'foreact');

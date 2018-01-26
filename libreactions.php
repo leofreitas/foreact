@@ -100,14 +100,34 @@ function has_vote($post,$reaction,$user){
     return $boo;
 }
 
-public function stack_names(){
+public function read_json_stack(){
     global $CFG;
     $stack = json_decode(file_get_contents($CFG->dirroot.'/mod/foreact/iconstack.json'), true);
-    $keys = array_keys($stack['Stack']);
-    $arrayName = array('0' => '1');
+    return $stack['Stack'];
+}
+public function stack_names(){
+    global $CFG;
+    $keys = array_keys($this->read_json_stack());
     return $keys;
 }
 
+public function add_new_icon(){
+    global $DB;
+    $stack = $this->read_json_stack();
+    $keys = $this->stack_names();
+    $record = new stdClass();
+    for ($i=0; $i <=1 ; $i++) { 
+    foreach ($stack[$keys[$i]] as $key => $value) {
+        if(!$DB->record_exists('foreact_reactions_type', array('type'=>$value['type'], 'name' =>$value['name'] ))){
+           $record->type=$value['type'];
+           $record->name=$value['name'];
+           $record->description=$value['description'];
+           $DB->insert_record('foreact_reactions_type', $record);
+        }
+        }   
+    }
+
+}
 
 }
 ?>

@@ -3,9 +3,12 @@
         "Instagram": [
             {"type":"fa", "name":"fa fa-heart-o fa-2x", "description":"Gostei"}
         ],
+        "Star Trek": [
+            {"type":"fa", "name":"fa fa-hand-spock-o fa-2x", "description":"Vida longa e Próspera"}
+        ],
         "Youtube": [
-            {"type":"fa", "name":"fa fa-heart-o fa-2x", "description":"Gostei"},
-            {"type":"fa", "name":"fa fa-heart-o fa-2x", "description":"Não gostei"}
+            {"type":"fa", "name":"fa fa-thumbs-o-up fa-2x", "description":"Gostei"},
+            {"type":"fa", "name":"fa fa-thumbs-o-down fa-2x", "description":"Não gostei"}
         ]
     }
 }

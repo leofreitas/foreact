@@ -135,6 +135,9 @@ function foreact_add_instance($foreact, $mform = null) {
     $completiontimeexpected = !empty($foreact->completionexpected) ? $foreact->completionexpected : null;
     \core_completion\api::update_completion_date_event($foreact->coursemodule, 'foreact', $foreact->id, $completiontimeexpected);
 
+    $libreactions = new Reactions();
+    $libreactions->add_new_stack($foreact->id,$foreact->iconoptions);
+
     return $foreact->id;
 }
 
@@ -241,10 +244,7 @@ function foreact_update_instance($foreact, $mform) {
         $discussion->name = $foreact->name;
         $DB->update_record('foreact_discussions', $discussion);
     }
-    $record = new stdClass();
-    $record->foreact         = $foreact->id;
-    $record->reaction         = '3';
-    $DB->insert_record('foreact_reactions', $record);
+
     $DB->update_record('foreact', $foreact);
 
     $modcontext = context_module::instance($foreact->coursemodule);

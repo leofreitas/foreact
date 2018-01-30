@@ -19,7 +19,7 @@ function get_reaction_type($foreact){
     for ($i=1; $i <= sizeof($reactions); $i++) {
         $type[$i] = $DB->get_records('foreact_reactions_type', array('id'=> $reactions[$i]->reaction));
     }
-    
+    print_r($type);
     return $type;
 
 
@@ -32,6 +32,7 @@ function get_reaction_icon($type, $post, $idreaction){
     $user=$USER->id;
     $idbutton =  $foreact.$post.$user;
     $out .='<hr>';
+    print_r($type);
     for ($i=1; $i <= sizeof($type); $i++) { 
         if ($type[$i][$i]->type == 'fa') {
             
@@ -116,7 +117,7 @@ public function add_new_icon(){
     $stack = $this->read_json_stack();
     $keys = $this->stack_names();
     $record = new stdClass();
-    for ($i=0; $i <=1 ; $i++) { 
+    for ($i=0; $i <=sizeof($keys) ; $i++) { 
     foreach ($stack[$keys[$i]] as $key => $value) {
         if(!$DB->record_exists('foreact_reactions_type', array('type'=>$value['type'], 'name' =>$value['name'] ))){
            $record->type=$value['type'];
@@ -127,6 +128,26 @@ public function add_new_icon(){
         }   
     }
 
+}
+
+public function add_new_stack($id,$reactions){
+    global $DB;
+    $stack = $this->read_json_stack();
+    $keys = $this->stack_names();
+    $record = new stdClass();
+    $record->foreact = $id;
+    $record->reaction= 3;
+    $DB->insert_record('foreact_reactions',$record);
+    $record2 = new stdClass();
+    $record2->foreact = $id;
+    $record2->reaction= 56;
+    $DB->insert_record('foreact_reactions',$record2);
+    foreach ($stack['Youtube'] as $key => $value) {
+           
+           
+        }   
+
+    
 }
 
 }

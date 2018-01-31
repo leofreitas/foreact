@@ -13,14 +13,16 @@
 
 function get_reaction_type($foreact){
     global $DB;
-
+    print_r($foreact);
     $reactions = $DB->get_records('foreact_reactions', array('foreact'=> $foreact),null, 'reaction');
+    //$reactions= $DB->get_records('foreact_reactions', array('foreact'=> $foreact), $sort='', $fields='reaction', $limitfrom=0, $limitnum=0) 
     $type = array();
     for ($i=1; $i <= sizeof($reactions); $i++) {
-        $type[$i] = $DB->get_records('foreact_reactions_type', array('id'=> $reactions[$i]->reaction));
+        $type[$i] = $DB->get_records('foreact_reactions_type', array('id'=> intval($reactions['60']->reaction)));
     }
-    print_r($type);
-    return $type;
+
+    print_r($reactions['60']->reaction);
+    //return $type;
 
 
 }

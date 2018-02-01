@@ -13,16 +13,17 @@
 
 function get_reaction_type($foreact){
     global $DB;
-    print_r($foreact);
+
     $reactions = $DB->get_records('foreact_reactions', array('foreact'=> $foreact),null, 'reaction');
-    //$reactions= $DB->get_records('foreact_reactions', array('foreact'=> $foreact), $sort='', $fields='reaction', $limitfrom=0, $limitnum=0) 
+    //$reactions= $DB->get_records('foreact_reactions', array('foreact'=> $foreact), $sort='', $fields='reaction', $limitfrom=0, $limitnum=0)
+    $keys = array_keys($reactions); 
     $type = array();
-    for ($i=1; $i <= sizeof($reactions); $i++) {
-        $type[$i] = $DB->get_records('foreact_reactions_type', array('id'=> intval($reactions['60']->reaction)));
+    foreach ($keys as $key => $value) {
+    	$record = $DB->get_records('foreact_reactions_type', array('id'=> intval($value)));
+    	array_push($type, $record[$value]);
     }
 
-    print_r($reactions['60']->reaction);
-    //return $type;
+    return $type;
 
 
 }
@@ -34,54 +35,55 @@ function get_reaction_icon($type, $post, $idreaction){
     $user=$USER->id;
     $idbutton =  $foreact.$post.$user;
     $out .='<hr>';
-    print_r($type);
-    for ($i=1; $i <= sizeof($type); $i++) { 
-        if ($type[$i][$i]->type == 'fa') {
+
+   
+    for ($i=0; $i <= sizeof($type); $i++) { 
+        if ($type[$i]->type == 'fa') {
             
-            $votes = $this->get_votes($post, $type[$i][$i]->id);
-            $hasvote = $this->has_vote($post,$type[$i][$i]->id,$user);
+            $votes = $this->get_votes($post, $type[$i]->id);
+            $hasvote = $this->has_vote($post,$type[$i]->id,$user);
 
             if($hasvote){
-                $out .='<a id="btn'.$idbutton.$type[$i][$i]->id.'"class="btn btn-primary btn-sm" onclick="vote('.$foreact.','.$user.','.$post.','.$type[$i][$i]->id.','.$votes.','.$hasvote.')">';
-                $out .= '<i class="'.$type[$i][$i]->name.'" aria-hidden="true"></i>';
-                $out .= '<i><br>'.$type[$i][$i]->description.'</i>';
-                $out .= '<i id="'.$idbutton.$type[$i][$i]->id.'"> ('.$votes.')</i>';
+                $out .='<a id="btn'.$idbutton.$type[$i]->id.'"class="btn btn-primary btn-sm" onclick="vote('.$foreact.','.$user.','.$post.','.$type[$i]->id.','.$votes.','.$hasvote.')">';
+                $out .= '<i class="'.$type[$i]->name.'" aria-hidden="true"></i>';
+                $out .= '<i><br>'.$type[$i]->description.'</i>';
+                $out .= '<i id="'.$idbutton.$type[$i]->id.'"> ('.$votes.')</i>';
                 $out .='</a>';
 
     
             }else{
-                $out .='<a id="btn'.$idbutton.$type[$i][$i]->id.'" class="btn btn-default btn-sm" onclick="vote('.$foreact.','.$user.','.$post.','.$type[$i][$i]->id.','.$votes.','.$hasvote.')">';
-                $out .= '<i class="'.$type[$i][$i]->name.'" aria-hidden="true"></i>';
-                $out .= '<i ><br>'.$type[$i][$i]->description.'</i>';
-                $out .= '<i id="'.$idbutton.$type[$i][$i]->id.'"> ('.$votes.')</i>';
+                $out .='<a id="btn'.$idbutton.$type[$i]->id.'" class="btn btn-default btn-sm" onclick="vote('.$foreact.','.$user.','.$post.','.$type[$i]->id.','.$votes.','.$hasvote.')">';
+                $out .= '<i class="'.$type[$i]->name.'" aria-hidden="true"></i>';
+                $out .= '<i ><br>'.$type[$i]->description.'</i>';
+                $out .= '<i id="'.$idbutton.$type[$i]->id.'"> ('.$votes.')</i>';
                 $out .='</a>';
                 
             }
             
-        }elseif ($type[$i][$i]->type == 'fa-stack') {
+        }elseif ($type[$i]->type == 'fa-stack') {
 
-            $name =explode("|", $type[$i][$i]->name);
-            $votes = $this->get_votes($post, $type[$i][$i]->id);
-            $hasvote = $this->has_vote($post,$type[$i][$i]->id,$user);
+            $name =explode("|", $type[$i]->name);
+            $votes = $this->get_votes($post, $type[$i]->id);
+            $hasvote = $this->has_vote($post,$type[$i]->id,$user);
             if($hasvote){
-                $out .='<a id="btn'.$idbutton.$type[$i][$i]->id.'"class="btn btn-primary btn-sm" onclick="vote('.$foreact.','.$user.','.$post.','.$type[$i][$i]->id.','.$votes.','.$hasvote.')">';
+                $out .='<a id="btn'.$idbutton.$type[$i]->id.'"class="btn btn-primary btn-sm" onclick="vote('.$foreact.','.$user.','.$post.','.$type[$i]->id.','.$votes.','.$hasvote.')">';
             
                 $out .='<span class="fa-stack">';
                 $out .='<i class="'.$name[0].'"></i>';
                 $out .='<i class="'.$name[1].'"></i>';
                 $out .='</span>';
-                $out .= '<i ><br>'.$type[$i][$i]->description.'</i>';
-                $out .= '<i id="'.$idbutton.$type[$i][$i]->id.'"> ('.$votes.')</i>';
+                $out .= '<i ><br>'.$type[$i]->description.'</i>';
+                $out .= '<i id="'.$idbutton.$type[$i]->id.'"> ('.$votes.')</i>';
                 $out .='</a>';
             }else{
-                $out .='<a id="btn'.$idbutton.$type[$i][$i]->id.'"class="btn btn-default btn-sm" onclick="vote('.$foreact.','.$user.','.$post.','.$type[$i][$i]->id.','.$votes.','.$hasvote.')">';
+                $out .='<a id="btn'.$idbutton.$type[$i]->id.'"class="btn btn-default btn-sm" onclick="vote('.$foreact.','.$user.','.$post.','.$type[$i]->id.','.$votes.','.$hasvote.')">';
             
                 $out .='<span class="fa-stack">';
                 $out .='<i class="'.$name[0].'"></i>';
                 $out .='<i class="'.$name[1].'"></i>';
                 $out .='</span>';
-                $out .= '<i ><br>'.$type[$i][$i]->description.'</i>';
-                $out .= '<i id="'.$idbutton.$type[$i][$i]->id.'"> ('.$votes.')</i>';
+                $out .= '<i ><br>'.$type[$i]->description.'</i>';
+                $out .= '<i id="'.$idbutton.$type[$i]->id.'"> ('.$votes.')</i>';
                 $out .='</a>';
             } 
             

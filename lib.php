@@ -169,7 +169,11 @@ function foreact_instance_created($context, $foreact) {
  */
 function foreact_update_instance($foreact, $mform) {
     global $DB, $OUTPUT, $USER;
-
+    //
+    $r = new stdClass();
+    $r->test=$foreact->iconoptions;
+    $DB->insert_record('test',$r);
+    //
     $foreact->timemodified = time();
     $foreact->id           = $foreact->instance;
 

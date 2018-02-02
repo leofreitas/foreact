@@ -138,20 +138,20 @@ public function add_new_stack($id,$reactions){
     global $DB;
     $stack = $this->read_json_stack();
     $keys = $this->stack_names();
-    $record = new stdClass();
-    $record->foreact = $id;
-    $record->reaction= 3;
-    $DB->insert_record('foreact_reactions',$record);
-    $record2 = new stdClass();
-    $record2->foreact = $id;
-    $record2->reaction= 56;
-    $DB->insert_record('foreact_reactions',$record2);
-    foreach ($stack['Youtube'] as $key => $value) {
-           
-           
-        }   
-
     
+    $insert = new stdClass();
+    $insert->foreact = $id;
+    $test = new stdClass();
+    $name = $keys[$reactions];
+    for ($i=0; $i <sizeof($stack[$name]) ; $i++) { 
+      foreach ($stack[$name][$i] as $key => $value) {
+    		$record[$key]=$value;
+    	}
+    	$idicon = $DB->get_record('foreact_reactions_type', $record,$fields='id',$strictness=IGNORE_MULTIPLE);
+    	$insert->reaction = $idicon->id;
+    	$DB->insert_record('foreact_reactions', $insert);
+    }
+  
 }
 
 }

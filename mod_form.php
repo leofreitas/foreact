@@ -55,13 +55,14 @@ class mod_foreact_mod_form extends moodleform_mod {
         $mform->addElement('select', 'type', get_string('foreacttype', 'foreact'), $foreacttypes);
         $mform->addHelpButton('type', 'foreacttype', 'foreact');
         $mform->setDefault('type', 'general');
-        //
+        ////////////////////////////////
         $libreactions = new Reactions();
         $libreactions->add_new_icon();
         $iconoptions = $libreactions->stack_names();
        	$mform->addElement('select', 'iconoptions', get_string('iconoptions', 'foreact'), $iconoptions);
         $mform->addHelpButton('iconoptions', 'iconoptionshelp', 'foreact');
-        //
+        $mform->setDefault('iconoptions', 2);
+        ///////////////////////////////////
         // Attachments and word count.
         $mform->addElement('header', 'attachmentswordcounthdr', get_string('attachmentswordcount', 'foreact'));
 

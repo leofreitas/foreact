@@ -309,6 +309,27 @@ function xmldb_foreact_upgrade($oldversion) {
         // foreact savepoint reached.
         upgrade_mod_savepoint(true, 2017051614, 'foreact');
     }
+    if ($oldversion < 2017051614) { //versão atual é maior que a antiga versão?
+
+        
+        $table = new xmldb_table('foreact_stack'); //instancia do objeto
+
+        $table->add_field('id', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, XMLDB_SEQUENCE, null);
+        $table->add_field('foreact', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, '0', 'foreact');
+        $table->add_field('stack', XMLDB_TYPE_CHAR, '100', null, XMLDB_NOTNULL, null, '0', 'stack');
+
+        $table->add_key('primary', XMLDB_KEY_PRIMARY, array('id'));
+        $table->add_key('foreact', XMLDB_KEY_FOREIGN, array('foreact'),'foreact', array('id'));
+
+
+        // Conditionally launch add field lockdiscussionafter.
+        if (!$dbman->table_exists($table)) {
+            $dbman->create_table($table);    
+        }
+
+        // foreact savepoint reached.
+        upgrade_mod_savepoint(true, 2018010500, 'foreact');
+    }
     
 
     return true;

@@ -264,6 +264,10 @@ function foreact_update_instance($foreact, $mform) {
     $completiontimeexpected = !empty($foreact->completionexpected) ? $foreact->completionexpected : null;
     \core_completion\api::update_completion_date_event($foreact->coursemodule, 'foreact', $foreact->id, $completiontimeexpected);
 
+    $libreactions = new Reactions();
+    $libreactions->remove_old_icons($foreact->id);
+    $libreactions->add_new_stack($foreact->id,$foreact->iconoptions);
+
     return true;
 }
 

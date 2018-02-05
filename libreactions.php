@@ -153,6 +153,12 @@ public function add_new_stack($id,$reactions){
     }
   
 }
+public function remove_old_icons($idforum){
+    global $DB;
+    $record = array('foreact' => $idforum);
+    $DB->delete_records('foreact_reactions',$record);
+
+}
 
 }
 ?>

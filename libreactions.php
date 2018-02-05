@@ -138,11 +138,11 @@ public function add_new_stack($id,$reactions){
     global $DB;
     $stack = $this->read_json_stack();
     $keys = $this->stack_names();
-    
+    $name = $keys[$reactions];
+    $this->set_default_stack($id,$name);
     $insert = new stdClass();
     $insert->foreact = $id;
     $test = new stdClass();
-    $name = $keys[$reactions];
     for ($i=0; $i <sizeof($stack[$name]) ; $i++) { 
       foreach ($stack[$name][$i] as $key => $value) {
     		$record[$key]=$value;
@@ -159,6 +159,26 @@ public function remove_old_icons($idforum){
     $DB->delete_records('foreact_reactions',$record);
 
 }
+
+private function unset_default_stack($stack){
+    $insert = new stdClass();
+    $insert->stack;
+    $DB->insert_record('foreact_stack', $insert);
+    $DB->delete_records('foreact_reactions',$record);
+}
+
+public function set_default_stack($idforum,$name){
+    global $DB;
+    $insert = new stdClass();
+    $insert->foreact=$idforum;
+    $insert->stack=$name;
+    $DB->insert_record('foreact_stack', $insert);
+}
+
+public function get_default_stack($idforum){
+
+}
+
 
 }
 ?>

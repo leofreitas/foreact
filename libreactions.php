@@ -134,6 +134,13 @@ public function add_new_icon(){
 
 }
 
+public function remove_old_icons($idforum){
+    global $DB;
+    $record = array('foreact' => $idforum);
+    $DB->delete_records('foreact_reactions',$record);
+
+}
+
 public function add_new_stack($id,$reactions){
     global $DB;
     $stack = $this->read_json_stack();
@@ -153,30 +160,36 @@ public function add_new_stack($id,$reactions){
     }
   
 }
-public function remove_old_icons($idforum){
+
+private function set_default_stack($idforum,$name){
     global $DB;
-    $record = array('foreact' => $idforum);
-    $DB->delete_records('foreact_reactions',$record);
-
-}
-
-private function unset_default_stack($stack){
+    $table = 'foreact_stack';
     $insert = new stdClass();
-    $insert->stack;
-    $DB->insert_record('foreact_stack', $insert);
-    $DB->delete_records('foreact_reactions',$record);
+    $insert->foreact = $idforum;
+    $insert->stack = $name;
+    if ($this->check_default_stack($table,$idforum)) {
+        $id = $DB->get_record($table, array('foreact' => $idforum) ,$fields='id',$strictness=IGNORE_MULTIPLE);
+        $insert->id = $id->id;
+        $this->update_default_stack($table, $insert);
+    }else{
+        $DB->insert_record($table, $insert);
+    }
 }
 
-public function set_default_stack($idforum,$name){
+
+private function update_default_stack($table, $record){
     global $DB;
-    $insert = new stdClass();
-    $insert->foreact=$idforum;
-    $insert->stack=$name;
-    $DB->insert_record('foreact_stack', $insert);
+    $DB->update_record($table, $record, $bulk=false);
 }
 
-public function get_default_stack($idforum){
+private function check_default_stack($table, $idforum){
+    global $DB;
+    $boo=FALSE;
+    if ($DB->record_exists($table, array('foreact'=> intval($idforum)))) {
+        $boo=TRUE;
+    }
 
+    return $boo;
 }
 
 

@@ -31,9 +31,10 @@ require_once('libreactions.php');
 class mod_foreact_mod_form extends moodleform_mod {
 
     function definition() {
-        global $CFG, $COURSE, $DB;
+        global $CFG, $COURSE, $DB, $PAGE;
 
         $mform    =& $this->_form;
+        
         $record = new stdClass();
         
 //-------------------------------------------------------------------------------
@@ -59,9 +60,12 @@ class mod_foreact_mod_form extends moodleform_mod {
         $libreactions = new Reactions();
         $libreactions->add_new_icon();
         $iconoptions = $libreactions->stack_names();
+
+        $stackdefault=$libreactions->get_default_stack($PAGE->activityrecord->id,$iconoptions);
+
        	$mform->addElement('select', 'iconoptions', get_string('iconoptions', 'foreact'), $iconoptions);
         $mform->addHelpButton('iconoptions', 'iconoptionshelp', 'foreact');
-        $mform->setDefault('iconoptions', 2);
+        $mform->setDefault('iconoptions', $stackdefault);
         ///////////////////////////////////
         // Attachments and word count.
         $mform->addElement('header', 'attachmentswordcounthdr', get_string('attachmentswordcount', 'foreact'));

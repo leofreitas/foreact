@@ -15,7 +15,6 @@ function get_reaction_type($foreact){
     global $DB;
 
     $reactions = $DB->get_records('foreact_reactions', array('foreact'=> $foreact),null, 'reaction');
-    //$reactions= $DB->get_records('foreact_reactions', array('foreact'=> $foreact), $sort='', $fields='reaction', $limitfrom=0, $limitnum=0)
     $keys = array_keys($reactions); 
     $type = array();
     foreach ($keys as $key => $value) {
@@ -192,6 +191,11 @@ private function check_default_stack($table, $idforum){
     return $boo;
 }
 
+public function get_default_stack($id,array $iconoptions){
+    global $DB;
+    $stackname = $DB->get_record('foreact_stack', array('foreact'=>$id),$fields='stack',$strictness=IGNORE_MULTIPLE);
+    return array_search($stackname->stack, $iconoptions);
+}   
 
 }
 ?>

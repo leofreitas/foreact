@@ -148,7 +148,6 @@ public function add_new_stack($id,$reactions){
     $this->set_default_stack($id,$name);
     $insert = new stdClass();
     $insert->foreact = $id;
-    $test = new stdClass();
     for ($i=0; $i <sizeof($stack[$name]) ; $i++) { 
       foreach ($stack[$name][$i] as $key => $value) {
     		$record[$key]=$value;

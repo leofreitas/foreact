@@ -1,14 +1,15 @@
 {
     "Stack": {
-        "Instagram": [
-            {"type":"fa", "name":"fa fa-heart-o fa-2x", "description":"Gostei"}
-        ],
-        "Star Trek": [
-            {"type":"fa", "name":"fa fa-hand-spock-o fa-2x", "description":"Vida longa e Próspera"}
-        ],
-        "Youtube": [
-            {"type":"fa", "name":"fa fa-thumbs-o-up fa-2x", "description":"Gostei"},
-            {"type":"fa", "name":"fa fa-thumbs-o-down fa-2x", "description":"Não gostei"}
+        "Habermas": [
+            {"type":"fa", "name":"fa fa-random fa-2x", "description":"Contradição"},
+            {"type":"fa", "name":"fa fa-exchange fa-2x", "description":"Inconsistência"},
+            {"type":"fa", "name":"fa fa-download fa-2x", "description":"Coerção"},
+            {"type":"fa", "name":"fa fa-balance-scale fa-2x", "description":"Justificação"},
+            {"type":"fa", "name":"fa fa-handshake-o fa-2x", "description":"Regras Aceitas"},
+            {"type":"fa", "name":"fa fa-bullseye fa-2x", "description":"Alvo da Discussão"},
+            {"type":"fa", "name":"fa fa-check-square-o fa-2x", "description":"Regras Válidas"},
+            {"type":"fa", "name":"fa fa-comments-o fa-2x", "description":"Debate Livre"}
+
         ]
     }
 }

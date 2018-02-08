@@ -64,7 +64,7 @@ class mod_foreact_mod_form extends moodleform_mod {
         $stackdefault=$libreactions->get_default_stack($PAGE->activityrecord->id,$iconoptions);
 
        	$mform->addElement('select', 'iconoptions', get_string('iconoptions', 'foreact'), $iconoptions);
-        $mform->addHelpButton('iconoptions', 'iconoptionshelp', 'foreact');
+        $mform->addHelpButton('iconoptions', 'iconoptions', 'foreact');
         $mform->setDefault('iconoptions', $stackdefault);
         ///////////////////////////////////
         // Attachments and word count.

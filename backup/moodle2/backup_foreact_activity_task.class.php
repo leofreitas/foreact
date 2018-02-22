@@ -60,27 +60,27 @@ class backup_foreact_activity_task extends backup_activity_task {
 
         // Link to the list of foreacts
         $search="/(".$base."\/mod\/foreact\/index.php\?id\=)([0-9]+)/";
-        $content= preg_replace($search, '$@foreactINDEX*$2@$', $content);
+        $content= preg_replace($search, '$@FOREACTINDEX*$2@$', $content);
 
         // Link to foreact view by moduleid
         $search="/(".$base."\/mod\/foreact\/view.php\?id\=)([0-9]+)/";
-        $content= preg_replace($search, '$@foreactVIEWBYID*$2@$', $content);
+        $content= preg_replace($search, '$@FOREACTVIEWBYID*$2@$', $content);
 
         // Link to foreact view by foreactid
         $search="/(".$base."\/mod\/foreact\/view.php\?f\=)([0-9]+)/";
-        $content= preg_replace($search, '$@foreactVIEWBYF*$2@$', $content);
+        $content= preg_replace($search, '$@FOREACTVIEWBYF*$2@$', $content);
 
         // Link to foreact discussion with parent syntax
         $search = "/(".$base."\/mod\/foreact\/discuss.php\?d\=)([0-9]+)(?:\&amp;|\&)parent\=([0-9]+)/";
-        $content= preg_replace($search, '$@foreactDISCUSSIONVIEWPARENT*$2*$3@$', $content);
+        $content= preg_replace($search, '$@FOREACTDISCUSSIONVIEWPARENT*$2*$3@$', $content);
 
         // Link to foreact discussion with relative syntax
         $search="/(".$base."\/mod\/foreact\/discuss.php\?d\=)([0-9]+)\#([0-9]+)/";
-        $content= preg_replace($search, '$@foreactDISCUSSIONVIEWINSIDE*$2*$3@$', $content);
+        $content= preg_replace($search, '$@FOREACTDISCUSSIONVIEWINSIDE*$2*$3@$', $content);
 
         // Link to foreact discussion by discussionid
         $search="/(".$base."\/mod\/foreact\/discuss.php\?d\=)([0-9]+)/";
-        $content= preg_replace($search, '$@foreactDISCUSSIONVIEW*$2@$', $content);
+        $content= preg_replace($search, '$@FOREACTDISCUSSIONVIEW*$2@$', $content);
 
         return $content;
     }

@@ -68,16 +68,16 @@ class restore_foreact_activity_task extends restore_activity_task {
         $rules = array();
 
         // List of foreacts in course
-        $rules[] = new restore_decode_rule('foreactINDEX', '/mod/foreact/index.php?id=$1', 'course');
+        $rules[] = new restore_decode_rule('FOREACTINDEX', '/mod/foreact/index.php?id=$1', 'course');
         // foreact by cm->id and foreact->id
-        $rules[] = new restore_decode_rule('foreactVIEWBYID', '/mod/foreact/view.php?id=$1', 'course_module');
-        $rules[] = new restore_decode_rule('foreactVIEWBYF', '/mod/foreact/view.php?f=$1', 'foreact');
+        $rules[] = new restore_decode_rule('FOREACTVIEWBYID', '/mod/foreact/view.php?id=$1', 'course_module');
+        $rules[] = new restore_decode_rule('FOREACTVIEWBYF', '/mod/foreact/view.php?f=$1', 'foreact');
         // Link to foreact discussion
-        $rules[] = new restore_decode_rule('foreactDISCUSSIONVIEW', '/mod/foreact/discuss.php?d=$1', 'foreact_discussion');
+        $rules[] = new restore_decode_rule('FOREACTDISCUSSIONVIEW', '/mod/foreact/discuss.php?d=$1', 'foreact_discussion');
         // Link to discussion with parent and with anchor posts
-        $rules[] = new restore_decode_rule('foreactDISCUSSIONVIEWPARENT', '/mod/foreact/discuss.php?d=$1&parent=$2',
+        $rules[] = new restore_decode_rule('FOREACTDISCUSSIONVIEWPARENT', '/mod/foreact/discuss.php?d=$1&parent=$2',
                                            array('foreact_discussion', 'foreact_post'));
-        $rules[] = new restore_decode_rule('foreactDISCUSSIONVIEWINSIDE', '/mod/foreact/discuss.php?d=$1#$2',
+        $rules[] = new restore_decode_rule('FOREACTDISCUSSIONVIEWINSIDE', '/mod/foreact/discuss.php?d=$1#$2',
                                            array('foreact_discussion', 'foreact_post'));
 
         return $rules;

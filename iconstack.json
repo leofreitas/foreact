@@ -1,5 +1,19 @@
 {
     "Stack": {
+
+        "Curtir": [
+            {"type":"fa", "name":"fa fa-thumbs-o-up fa-2x", "description":"Curtir"}
+        ],
+        
+        "Curtir (completo)": [
+            {"type":"fa", "name":"fa fa-thumbs-o-up fa-2x", "description":"Curtir"},
+            {"type":"fa", "name":"fa fa-thumbs-o-down fa-2x", "description":"Não Curtir"},
+            {"type":"fa", "name":"fa fa-heart-o fa-2x", "description":"Adorei"},
+            {"type":"fa", "name":"fa fa-star-o fa-2x", "description":"Brilhante"},
+            {"type":"fa", "name":"fa fa-check-circle-o fa-2x", "description":"Concordo"},
+            {"type":"fa", "name":"fa fa-times-circle-o fa-2x", "description":"Discordo"}
+        ],
+
         "Habermas": [
             {"type":"fa", "name":"fa fa-random fa-2x", "description":"Contradição"},
             {"type":"fa", "name":"fa fa-exchange fa-2x", "description":"Inconsistência"},
@@ -9,7 +23,7 @@
             {"type":"fa", "name":"fa fa-bullseye fa-2x", "description":"Alvo da Discussão"},
             {"type":"fa", "name":"fa fa-check-square-o fa-2x", "description":"Regras Válidas"},
             {"type":"fa", "name":"fa fa-comments-o fa-2x", "description":"Debate Livre"}
-
         ]
+
     }
 }

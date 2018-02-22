@@ -169,7 +169,7 @@ function foreact_instance_created($context, $foreact) {
  */
 function foreact_update_instance($foreact, $mform) {
     global $DB, $OUTPUT, $USER;
-    
+    //
     $foreact->timemodified = time();
     $foreact->id           = $foreact->instance;
 

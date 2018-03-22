@@ -93,6 +93,17 @@ function get_reaction_icon($type, $post, $idreaction){
     return $out;
 
 }
+function has_any_vote($post,$user){
+    global $DB;
+    $boo=0;
+    $table='foreact_reactions_votes';
+    $conditions = array('post' => $post,'user'=>$user );
+    if($DB->record_exists($table, $conditions)){
+        $boo=1;
+    };
+    return $boo;
+}
+
 function has_vote($post,$reaction,$user){
     global $DB;
     $boo=0;
@@ -122,6 +133,7 @@ public function add_new_icon(){
     $record = new stdClass();
     for ($i=0; $i <=sizeof($keys) ; $i++) { 
     foreach ($stack[$keys[$i]] as $key => $value) {
+
         if(!$DB->record_exists('foreact_reactions_type', array('type'=>$value['type'], 'name' =>$value['name'], 'description' =>$value['description'] ))){
            $record->type=$value['type'];
            $record->name=$value['name'];

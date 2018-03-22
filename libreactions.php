@@ -122,7 +122,6 @@ public function add_new_icon(){
     $record = new stdClass();
     for ($i=0; $i <=sizeof($keys) ; $i++) { 
     foreach ($stack[$keys[$i]] as $key => $value) {
-        echo($value['description']);
         if(!$DB->record_exists('foreact_reactions_type', array('type'=>$value['type'], 'name' =>$value['name'], 'description' =>$value['description'] ))){
            $record->type=$value['type'];
            $record->name=$value['name'];

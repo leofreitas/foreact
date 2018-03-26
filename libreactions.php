@@ -32,7 +32,7 @@ function get_reaction_icon($type, $post, $idreaction){
     $out = '';
     $foreact=$idreaction[0];
     $user=$USER->id;
-    $idbutton =  $foreact.$post.$user;
+    $idbutton =  $foreact.$post;
     $out .='<hr>';
 
    
@@ -208,5 +208,11 @@ public function get_default_stack($id,array $iconoptions){
     return array_search($stackname->stack, $iconoptions);
 }   
 
+public function get_last_vote($post, $user){
+    global $DB;
+    $idreaction = $DB->get_record('foreact_reactions_votes', array('post'=>$post,'user'=>$user),$fields='reaction',$strictness=IGNORE_MULTIPLE);
+    return $idreaction->reaction;   
+
+}
 }
 ?>

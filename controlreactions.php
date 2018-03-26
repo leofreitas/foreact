@@ -12,7 +12,13 @@ $record = new stdClass();
 $record->post = $post;
 $record->reaction = $reaction;
 $record->user = $user;
-        
+
+$vote = $ireactions->has_vote($post,$reaction,$user);
+$reactionid = 0;
+if($ireactions->has_any_vote($post,$user)){
+	$reactionid = $ireactions->get_last_vote($post, $user);
+}
+
 if ($ireactions->has_any_vote($post,$user)) {
 		$reaction_sql = $DB->get_record($table, array('post'=>$post,'user'=>$user),$fields='reaction',$strictness=IGNORE_MULTIPLE);
 
@@ -30,7 +36,7 @@ if ($ireactions->has_any_vote($post,$user)) {
         $DB->insert_record($table, $record, false, false);
 }
 
-$response = array('votes' => $ireactions->get_votes($post,$reaction),'has_vote'=>$ireactions->has_vote($post,$reaction,$user) );
+$response = array('votes' => $ireactions->get_votes($post,$reaction),'had_vote'=>$vote,'last_vote'=>$reactionid);
 echo json_encode($response);
 
 

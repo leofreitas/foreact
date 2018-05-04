@@ -27,9 +27,9 @@ defined('MOODLE_INTERNAL') || die();
 
 $tagareas = array(
     array(
-        'itemtype' => 'forum_posts',
-        'component' => 'mod_forum',
-        'callback' => 'mod_forum_get_tagged_posts',
-        'callbackfile' => '/mod/forum/locallib.php',
+        'itemtype' => 'foreact_posts',
+        'component' => 'mod_foreact',
+        'callback' => 'mod_foreact_get_tagged_posts',
+        'callbackfile' => '/mod/foreact/locallib.php',
     ),
 );

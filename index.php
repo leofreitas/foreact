@@ -250,7 +250,7 @@ if ($generalforeacts) {
 
                 if (($foreact->trackingtype == foreact_TRACKING_FORCED) && ($CFG->foreact_allowforcedreadtracking)) {
                     $trackedlink = $stryes;
-                } else if ($foreact->trackingtype === foreact_TRACKING_OFF || ($USER->trackforeacts == 0)) {
+                } else if ($foreact->trackingtype === foreact_TRACKING_OFF || ($user->trackforums == 0)) {
                     $trackedlink = '-';
                 } else {
                     $aurl = new moodle_url('/mod/foreact/settracking.php', array(
@@ -381,7 +381,7 @@ if ($course->id != SITEID) {    // Only real courses have learning foreacts
 
                     if (($foreact->trackingtype == foreact_TRACKING_FORCED) && ($CFG->foreact_allowforcedreadtracking)) {
                         $trackedlink = $stryes;
-                    } else if ($foreact->trackingtype === foreact_TRACKING_OFF || ($USER->trackforeacts == 0)) {
+                    } else if ($foreact->trackingtype === foreact_TRACKING_OFF || ($user->trackforums == 0)) {
                         $trackedlink = '-';
                     } else {
                         $aurl = new moodle_url('/mod/foreact/settracking.php', array('id' => $foreact->id));

@@ -1,234 +1,219 @@
-    <?php
+<?php
 
+class Reactions {
 
-     class Reactions{
-     function get_votes($post, $reaction){
+    function get_votes($post, $reaction) {
         global $DB;
 
-        $votes = $DB->count_records('foreact_reactions_votes', array('post' => $post, 'reaction' => $reaction ));
+        $votes = $DB->count_records('foreact_reactions_votes', array('post' => $post, 'reaction' => $reaction));
 
 
         return $votes;
     }
 
-    function get_reaction_type($foreact){
+    function get_reaction_type($foreact) {
         global $DB;
 
-        $reactions = $DB->get_records('foreact_reactions', array('foreact'=> $foreact),null, 'reaction');
-        $keys = array_keys($reactions); 
+        $reactions = $DB->get_records('foreact_reactions', array('foreact' => $foreact), null, 'reaction');
+        $keys = array_keys($reactions);
         $type = array();
         foreach ($keys as $key => $value) {
-        	$record = $DB->get_records('foreact_reactions_type', array('id'=> intval($value)));
-        	array_push($type, $record[$value]);
+            $record = $DB->get_records('foreact_reactions_type', array('id' => intval($value)));
+            array_push($type, $record[$value]);
         }
 
         return $type;
-
-
     }
 
-    function get_reaction_icon($type, $post, $idreaction){
+    function get_reaction_icon($types, $post, $idreaction) {
         global $USER;
         $out = '';
-        $foreact=$idreaction[0];
-        $user=$USER->id;
-        $idbutton =  $foreact.$post;
-        $out .='<hr>';
+        $foreact = $idreaction[0];
+        $user = $USER->id;
+        $idbutton = $foreact . $post;
+        $out .= '<hr>';
 
-       
-        for ($i=0; $i <= sizeof($type); $i++) { 
-            if ($type[$i]->type == 'fa') {
-                
-                $votes = $this->get_votes($post, $type[$i]->id);
-                $hasvote = $this->has_vote($post,$type[$i]->id,$user);
+        foreach ($types as $type) {
+            if ($type->type == 'fa') {
 
-                if($hasvote){
-                    $out .='<a id="btn'.$idbutton.$type[$i]->id.'"class="btn btn-primary btn-sm" onclick="vote('.$foreact.','.$user.','.$post.','.$type[$i]->id.','.$votes.','.$hasvote.')">';
-                    $out .= '<i class="'.$type[$i]->name.'" aria-hidden="true"></i>';
-                    $out .= '<i><br>'.$type[$i]->description.'</i>';
-                    $out .= '<i id="'.$idbutton.$type[$i]->id.'"> ('.$votes.')</i>';
-                    $out .='</a>';
+                $votes = $this->get_votes($post, $type->id);
+                $hasvote = $this->has_vote($post, $type->id, $user);
 
-        
-                }else{
-                    $out .='<a id="btn'.$idbutton.$type[$i]->id.'" class="btn btn-default btn-sm" onclick="vote('.$foreact.','.$user.','.$post.','.$type[$i]->id.','.$votes.','.$hasvote.')">';
-                    $out .= '<i class="'.$type[$i]->name.'" aria-hidden="true"></i>';
-                    $out .= '<i ><br>'.$type[$i]->description.'</i>';
-                    $out .= '<i id="'.$idbutton.$type[$i]->id.'"> ('.$votes.')</i>';
-                    $out .='</a>';
-                    
+                if ($hasvote) {
+                    $out .= '<a id="btn' . $idbutton . $type->id . '"class="btn btn-primary btn-sm" onclick="vote(' . $foreact . ',' . $user . ',' . $post . ',' . $type->id . ',' . $votes . ',' . $hasvote . ')">';
+                    $out .= '<i class="' . $type->name . '" aria-hidden="true"></i>';
+                    $out .= '<i><br>' . $type->description . '</i>';
+                    $out .= '<i id="' . $idbutton . $type->id . '"> (' . $votes . ')</i>';
+                    $out .= '</a>';
+                } else {
+                    $out .= '<a id="btn' . $idbutton . $type->id . '" class="btn btn-default btn-sm" onclick="vote(' . $foreact . ',' . $user . ',' . $post . ',' . $type->id . ',' . $votes . ',' . $hasvote . ')">';
+                    $out .= '<i class="' . $type->name . '" aria-hidden="true"></i>';
+                    $out .= '<i ><br>' . $type->description . '</i>';
+                    $out .= '<i id="' . $idbutton . $type->id . '"> (' . $votes . ')</i>';
+                    $out .= '</a>';
                 }
-                
-            }elseif ($type[$i]->type == 'fa-stack') {
+            } elseif ($type->type == 'fa-stack') {
 
-                $name =explode("|", $type[$i]->name);
-                $votes = $this->get_votes($post, $type[$i]->id);
-                $hasvote = $this->has_vote($post,$type[$i]->id,$user);
-                if($hasvote){
-                    $out .='<a id="btn'.$idbutton.$type[$i]->id.'"class="btn btn-primary btn-sm" onclick="vote('.$foreact.','.$user.','.$post.','.$type[$i]->id.','.$votes.','.$hasvote.')">';
-                
-                    $out .='<span class="fa-stack">';
-                    $out .='<i class="'.$name[0].'"></i>';
-                    $out .='<i class="'.$name[1].'"></i>';
-                    $out .='</span>';
-                    $out .= '<i ><br>'.$type[$i]->description.'</i>';
-                    $out .= '<i id="'.$idbutton.$type[$i]->id.'"> ('.$votes.')</i>';
-                    $out .='</a>';
-                }else{
-                    $out .='<a id="btn'.$idbutton.$type[$i]->id.'"class="btn btn-default btn-sm" onclick="vote('.$foreact.','.$user.','.$post.','.$type[$i]->id.','.$votes.','.$hasvote.')">';
-                
-                    $out .='<span class="fa-stack">';
-                    $out .='<i class="'.$name[0].'"></i>';
-                    $out .='<i class="'.$name[1].'"></i>';
-                    $out .='</span>';
-                    $out .= '<i ><br>'.$type[$i]->description.'</i>';
-                    $out .= '<i id="'.$idbutton.$type[$i]->id.'"> ('.$votes.')</i>';
-                    $out .='</a>';
-                } 
-                
+                $name = explode("|", $type->name);
+                $votes = $this->get_votes($post, $type->id);
+                $hasvote = $this->has_vote($post, $type->id, $user);
+                if ($hasvote) {
+                    $out .= '<a id="btn' . $idbutton . $type->id . '"class="btn btn-primary btn-sm" onclick="vote(' . $foreact . ',' . $user . ',' . $post . ',' . $type->id . ',' . $votes . ',' . $hasvote . ')">';
 
+                    $out .= '<span class="fa-stack">';
+                    $out .= '<i class="' . $name[0] . '"></i>';
+                    $out .= '<i class="' . $name[1] . '"></i>';
+                    $out .= '</span>';
+                    $out .= '<i ><br>' . $type->description . '</i>';
+                    $out .= '<i id="' . $idbutton . $type->id . '"> (' . $votes . ')</i>';
+                    $out .= '</a>';
+                } else {
+                    $out .= '<a id="btn' . $idbutton . $type->id . '"class="btn btn-default btn-sm" onclick="vote(' . $foreact . ',' . $user . ',' . $post . ',' . $type->id . ',' . $votes . ',' . $hasvote . ')">';
+
+                    $out .= '<span class="fa-stack">';
+                    $out .= '<i class="' . $name[0] . '"></i>';
+                    $out .= '<i class="' . $name[1] . '"></i>';
+                    $out .= '</span>';
+                    $out .= '<i ><br>' . $type->description . '</i>';
+                    $out .= '<i id="' . $idbutton . $type->id . '"> (' . $votes . ')</i>';
+                    $out .= '</a>';
+                }
             }
-            
         }
         return $out;
-
     }
-    function has_any_vote($post,$user){
+
+    function has_any_vote($post, $user) {
         global $DB;
-        $boo=0;
-        $table='foreact_reactions_votes';
-        $conditions = array('post' => $post,'user'=>$user );
-        if($DB->record_exists($table, $conditions)){
-            $boo=1;
+        $boo = 0;
+        $table = 'foreact_reactions_votes';
+        $conditions = array('post' => $post, 'user' => $user);
+        if ($DB->record_exists($table, $conditions)) {
+            $boo = 1;
         };
         return $boo;
     }
 
-    function has_vote($post,$reaction,$user){
+    function has_vote($post, $reaction, $user) {
         global $DB;
-        $boo=0;
-        $table='foreact_reactions_votes';
-        $conditions = array('post' => $post, 'reaction'=>$reaction,'user'=>$user );
-        if($DB->record_exists($table, $conditions)){
-            $boo=1;
+        $boo = 0;
+        $table = 'foreact_reactions_votes';
+        $conditions = array('post' => $post, 'reaction' => $reaction, 'user' => $user);
+        if ($DB->record_exists($table, $conditions)) {
+            $boo = 1;
         };
         return $boo;
     }
 
-    public function read_json_stack(){
+    public function read_json_stack() {
         global $CFG;
-        $stack = json_decode(file_get_contents($CFG->dirroot.'/mod/foreact/iconstack.json'), true);
+        $stack = json_decode(file_get_contents($CFG->dirroot . '/mod/foreact/iconstack.json'), true);
         return $stack['Stack'];
     }
-    public function stack_names(){
+
+    public function stack_names() {
         global $CFG;
         $keys = array_keys($this->read_json_stack());
         return $keys;
     }
 
-    public function add_new_icon(){
+    public function add_new_icon() {
         global $DB;
         $stack = $this->read_json_stack();
         $keys = $this->stack_names();
         $record = new stdClass();
-        for ($i=0; $i <=sizeof($keys) ; $i++) { 
-        foreach ($stack[$keys[$i]] as $key => $value) {
+        for ($i = 0; $i < sizeof($keys); $i++) {
+            foreach ($stack[$keys[$i]] as $key => $value) {
 
-            if(!$DB->record_exists('foreact_reactions_type', array('type'=>$value['type'], 'name' =>$value['name'], 'description' =>$value['description'] ))){
-               $record->type=$value['type'];
-               $record->name=$value['name'];
-               $record->description=$value['description'];
-               $DB->insert_record('foreact_reactions_type', $record);
+                if (!$DB->record_exists('foreact_reactions_type', array('type' => $value['type'], 'name' => $value['name'], 'description' => $value['description']))) {
+                    $record->type = $value['type'];
+                    $record->name = $value['name'];
+                    $record->description = $value['description'];
+                    $DB->insert_record('foreact_reactions_type', $record);
+                }
             }
-            }   
         }
-
     }
 
-    public function remove_old_icons($idforum){
+    public function remove_old_icons($idforum) {
         global $DB;
         $record = array('foreact' => $idforum);
-        $DB->delete_records('foreact_reactions',$record);
-
+        $DB->delete_records('foreact_reactions', $record);
     }
 
-    public function add_new_stack($id,$reactions){
+    public function add_new_stack($id, $reactions) {
         global $DB;
         $stack = $this->read_json_stack();
         $keys = $this->stack_names();
         $name = $keys[$reactions];
-        $this->set_default_stack($id,$name);
+        $this->set_default_stack($id, $name);
         $insert = new stdClass();
         $insert->foreact = $id;
-        for ($i=0; $i <sizeof($stack[$name]) ; $i++) { 
-          foreach ($stack[$name][$i] as $key => $value) {
-        		$record[$key]=$value;
-        	}
-        	$idicon = $DB->get_record('foreact_reactions_type', $record,$fields='id',$strictness=IGNORE_MULTIPLE);
-        	$insert->reaction = $idicon->id;
-        	$DB->insert_record('foreact_reactions', $insert);
+        for ($i = 0; $i < sizeof($stack[$name]); $i++) {
+            foreach ($stack[$name][$i] as $key => $value) {
+                $record[$key] = $value;
+            }
+            $idicon = $DB->get_record('foreact_reactions_type', $record, $fields = 'id', $strictness = IGNORE_MULTIPLE);
+            $insert->reaction = $idicon->id;
+            $DB->insert_record('foreact_reactions', $insert);
         }
-      
     }
 
-    private function set_default_stack($idforum,$name){
+    private function set_default_stack($idforum, $name) {
         global $DB;
         $table = 'foreact_stack';
         $insert = new stdClass();
         $insert->foreact = $idforum;
         $insert->stack = $name;
-        if ($this->check_default_stack($table,$idforum)) {
-            $id = $DB->get_record($table, array('foreact' => $idforum) ,$fields='id',$strictness=IGNORE_MULTIPLE);
+        if ($this->check_default_stack($table, $idforum)) {
+            $id = $DB->get_record($table, array('foreact' => $idforum), $fields = 'id', $strictness = IGNORE_MULTIPLE);
             $insert->id = $id->id;
             $this->update_default_stack($table, $insert);
-        }else{
+        } else {
             $DB->insert_record($table, $insert);
         }
     }
 
-
-    private function update_default_stack($table, $record){
+    private function update_default_stack($table, $record) {
         global $DB;
-        $DB->update_record($table, $record, $bulk=false);
+        $DB->update_record($table, $record, $bulk = false);
     }
 
-    private function check_default_stack($table, $idforum){
+    private function check_default_stack($table, $idforum) {
         global $DB;
-        $boo=FALSE;
-        if ($DB->record_exists($table, array('foreact'=> intval($idforum)))) {
-            $boo=TRUE;
+        $boo = FALSE;
+        if ($DB->record_exists($table, array('foreact' => intval($idforum)))) {
+            $boo = TRUE;
         }
 
         return $boo;
     }
 
-    public function get_default_stack($id,array $iconoptions){
+    public function get_default_stack($id, array $iconoptions) {
         global $DB;
-        $stackname = $DB->get_record('foreact_stack', array('foreact'=>$id),$fields='stack',$strictness=IGNORE_MULTIPLE);
+        $stackname = $DB->get_record('foreact_stack', array('foreact' => $id), $fields = 'stack', $strictness = IGNORE_MULTIPLE);
         return array_search($stackname->stack, $iconoptions);
-    }   
-
-    public function get_last_vote($post, $user){
-        global $DB;
-        $idreaction = $DB->get_record('foreact_reactions_votes', array('post'=>$post,'user'=>$user),$fields='reaction',$strictness=IGNORE_MULTIPLE);
-        return $idreaction->reaction;   
-
     }
 
-    public function delete_vote($post, $reaction, $user){
+    public function get_last_vote($post, $user) {
+        global $DB;
+        $idreaction = $DB->get_record('foreact_reactions_votes', array('post' => $post, 'user' => $user), $fields = 'reaction', $strictness = IGNORE_MULTIPLE);
+        return $idreaction->reaction;
+    }
+
+    public function delete_vote($post, $reaction, $user) {
         global $DB;
         $table = 'foreact_reactions_votes';
-        $where = array('post' => $post,'reaction'=> $reaction,'user'=>$user );
+        $where = array('post' => $post, 'reaction' => $reaction, 'user' => $user);
         $DB->delete_records($table, $where);
     }
 
-    public function add_vote($record){
+    public function add_vote($record) {
         global $DB;
         $table = 'foreact_reactions_votes';
         $DB->insert_record($table, $record, false, false);
-
-
     }
 
-    }
-    ?>
+}
+
+?>

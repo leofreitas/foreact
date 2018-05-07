@@ -6637,7 +6637,7 @@ function foreact_tp_can_track_foreacts($foreact=false, $user=false) {
             // Since we can force tracking, assume yes without a specific foreact.
             return true;
         } else {
-            return (bool)$user->trackforeacts;
+            return (bool)$user->trackforums;
         }
     }
 
@@ -6652,10 +6652,10 @@ function foreact_tp_can_track_foreacts($foreact=false, $user=false) {
 
     if ($CFG->foreact_allowforcedreadtracking) {
         // If we allow forcing, then forced foreacts takes procidence over user setting.
-        return ($foreactforced || ($foreactallows  && (!empty($user->trackforeacts) && (bool)$user->trackforeacts)));
+        return ($foreactforced || ($foreactallows  && (!empty($user->trackforums) && (bool)$user->trackforums)));
     } else {
         // If we don't allow forcing, user setting trumps.
-        return ($foreactforced || $foreactallows)  && !empty($user->trackforeacts);
+        return ($foreactforced || $foreactallows)  && !empty($user->trackforums);
     }
 }
 
